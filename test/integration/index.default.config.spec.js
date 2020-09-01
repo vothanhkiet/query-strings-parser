@@ -78,7 +78,7 @@ describe('queryFilter()', function () {
 
         context('when query contains ordination param', function () {
             it('should return req.query with set ordination params', function () {
-                const expect_sort = {name: 'asc', age: 'desc'}
+                const expect_sort = {name: 1, age: -1}
 
                 const options = JSON.parse(JSON.stringify(default_options))
                 options.default.sort = expect_sort
@@ -132,13 +132,13 @@ describe('queryFilter()', function () {
                 const expect_filters = {
                     '$and': [
                         {
-                            name: {'$options': 'i', '$regex': '^lucas'}
+                            name: { '$options': 'i', '$regex': '^l[u,ü,ú,ù]c[a,á,à,ä,â,ã]s' }
                         },
                         {
-                            name: {'$options': 'i', '$regex': 'douglas$'}
+                            name: { '$options': 'i', '$regex': 'd[o,ó,ö,ò,ô][u,ü,ú,ù]gl[a,á,à,ä,â,ã]s$' }
                         },
                         {
-                            name: {'$options': 'i', '$regex': 'jorge'}
+                            name: { '$options': 'i', '$regex': 'j[o,ó,ö,ò,ô]rg[e,é,ë,ê]' }
                         }],
                     'school.name': 'UEPB',
                     'timestamp': '2018-12-05T00:00:00',
